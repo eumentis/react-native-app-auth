@@ -84,6 +84,10 @@ public final class TokenResponseFactory {
             map.putString("accessTokenExpirationTime", DateUtil.formatTimestamp(authResponse.accessTokenExpirationTime));
         }
 
+        if (!TextUtils.isEmpty(authResponse.state)) {
+            map.putString("state", authResponse.state);
+        }
+
         return map;
     }
 
@@ -105,6 +109,10 @@ public final class TokenResponseFactory {
 
         if (!TextUtils.isEmpty(codeVerifier)) {
             map.putString("codeVerifier", codeVerifier);
+        }
+
+        if (!TextUtils.isEmpty(authResponse.state)) {
+            map.putString("state", authResponse.state);
         }
 
         return map;
