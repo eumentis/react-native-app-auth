@@ -363,8 +363,10 @@ RCT_REMAP_METHOD(logout,
                                                        if (authorizationResponse) {
                                                            resolve([self formatAuthorizationResponse:authorizationResponse withCodeVerifier:codeVerifier]);
                                                        } else {
+                                                           NSString *errorMsg = [self getErrorMessage: error];
+                                                           NSString *finalErrorMsg=[NSString stringWithFormat:@"%@||codeVerifier=%@",errorMsg,codeVerifier];
                                                            reject([self getErrorCode: error defaultCode:@"authentication_failed"],
-                                                                  [self getErrorMessage: error], error);
+                                                                  finalErrorMsg, error);
                                                        }
                                                    }]; // end [OIDAuthState presentAuthorizationRequest:request
     } else {
